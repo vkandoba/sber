@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DatacolPluginTemplate</RootNamespace>
-    <AssemblyName>D5Plugin_TemplateWithDescription</AssemblyName>
+    <AssemblyName>D5Plugin_Mtk</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -92,6 +92,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="parameters.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="plugin_convention.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
