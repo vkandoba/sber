@@ -4,28 +4,20 @@ using PluginCore;
 
 namespace PluginFunctionalTests
 {
-    [TestFixture]
-    public class LoadPageTest
+    public class LoadPageTest : TestBase
     {
-        private WebClient client;
-        private const string pageUrl = "http://www.mtk.ru/commercial-buildings/sale/commercial/";
-
-        [SetUp]
-        public void Init()
-        {
-            client = new WebClient();
-        }
+        private const string page = "http://www.mtk.ru/commercial-buildings/sale/commercial/";
 
         [Test]
         public void TestUnsafeHeaderParsing()
         {
-            Assert.Throws<WebException>(LoadPage);
+            Assert.Throws<WebException>(Load);
 
             PluginConfigrator.UnsafeHeaderParsingOn();
-            Assert.DoesNotThrow(LoadPage);
+            Assert.DoesNotThrow(Load);
 
             PluginConfigrator.UnsafeHeaderParsingOff();
-            Assert.Throws<WebException>(LoadPage);
+            Assert.Throws<WebException>(Load);
         }
 
         [Test]
@@ -33,29 +25,24 @@ namespace PluginFunctionalTests
         {
             PluginConfigrator.UnsafeHeaderParsingOn();
             PluginConfigrator.UnsafeHeaderParsingOn();
-            Assert.DoesNotThrow(LoadPage);
+            Assert.DoesNotThrow(Load);
 
             PluginConfigrator.UnsafeHeaderParsingOff();
-            Assert.DoesNotThrow(LoadPage);
+            Assert.DoesNotThrow(Load);
 
             PluginConfigrator.UnsafeHeaderParsingOff();
-            Assert.Throws<WebException>(LoadPage);
+            Assert.Throws<WebException>(Load);
 
             PluginConfigrator.UnsafeHeaderParsingOff();
             PluginConfigrator.UnsafeHeaderParsingOff();
             PluginConfigrator.UnsafeHeaderParsingOn();
-            Assert.DoesNotThrow(LoadPage);
+            Assert.DoesNotThrow(Load);
+            PluginConfigrator.UnsafeHeaderParsingOff();
         }
 
-        private void LoadPage()
+        private void Load()
         {
-            client.DownloadData(pageUrl);
-        }
-
-        [TearDown]
-        public void Destroy()
-        {
-            client.Dispose();
+            DownloadPage(page);
         }
     }
 }
