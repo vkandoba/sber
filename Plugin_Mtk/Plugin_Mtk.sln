@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin_Mtk", "DatacolPluginTemplate\Plugin_Mtk.csproj", "{7281E037-2433-4EEB-A2D5-EDAE63491FEB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin_Mtk", "Plugin_Mtk\Plugin_Mtk.csproj", "{7281E037-2433-4EEB-A2D5-EDAE63491FEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginFunctionalTests", "PluginTests\PluginFunctionalTests.csproj", "{60550B3A-CD61-4E50-8AE0-9CF6A7CEC2F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginFunctionalTests", "PluginFunctionalTests\PluginFunctionalTests.csproj", "{60550B3A-CD61-4E50-8AE0-9CF6A7CEC2F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
