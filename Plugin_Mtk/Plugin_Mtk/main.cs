@@ -12,20 +12,8 @@ namespace Plugin_Mtk
 {
     public class HandlerClass : PluginInterface.IPlugin
     {
-        // Create a new Mutex. The creating thread does not own the 
-        // Mutex. 
         public static int globalCounter = 0;
 
-        /// <summary>
-        /// Обработчик плагина
-        /// </summary>
-        /// <param name="parameters">Словарь параметров: ключ - имя параметра (string), 
-        /// значение - содержимое параметра (object, который в зависимости от типа плагина (задается в parameters["type"])
-        /// и ключа приводится к тому или иному типу) </param>
-        /// <param name="error">Переменная (string), в которую возвращается ошибка работы плагина, 
-        /// если таковая произошла. Если ошибки не произошло, данная переменная должна оставаться пустой строкой</param>
-        /// <returns>Возвращаемое значение - это объект, который может иметь тот или иной тип,
-        /// в зависимости от типа плагина (задается в  parameters["type"])</returns>
         public object pluginHandler(Dictionary<string, object> parameters, out string error)
         {
             try
@@ -419,7 +407,7 @@ namespace Plugin_Mtk
 
         #endregion
 
-        #region Методы и свойства необходимые, для соответствия PluginInterface (обычно не используются при создании плагина)
+        #region Методы и свойства необходимые, для соответствия PluginInterface
 
         public void Init()
         {
@@ -433,12 +421,12 @@ namespace Plugin_Mtk
 
         public string Name
         {
-            get { return "PluginName"; }
+            get { return "Mtk"; }
         }
 
         public string Description
         {
-            get { return "Описание текущего плагина"; }
+            get { return "Парсер http://www.mtk.ru/"; }
         }
 
         #endregion
