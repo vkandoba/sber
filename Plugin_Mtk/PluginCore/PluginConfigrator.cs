@@ -17,7 +17,7 @@ namespace PluginCore
         /// <summary>
         /// Способ выставить через Reflection настройку, определяемую в app.config
         ///       <httpWebRequest useUnsafeHeaderParsing = "true" />
-        /// т. к. app.config приложения, куда загружается плагин, недостапун
+        /// т. к. app.config приложения, куда загружается плагин, недоступен
         /// </summary>
         private static bool SetUnsafeHeaderParsingBase(bool value)
         {

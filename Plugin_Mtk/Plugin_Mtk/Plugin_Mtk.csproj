@@ -43,7 +43,7 @@
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>..\..\build\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -60,23 +60,23 @@
     </Reference>
     <Reference Include="edtFTPnet, Version=2.2.1.0, Culture=neutral, PublicKeyToken=4b0c991f43097782">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\assemblyedtFTPnet.dll</HintPath>
+      <HintPath>..\assembly\edtFTPnet.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.4.0.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\assemblyHtmlAgilityPack.dll</HintPath>
+      <HintPath>..\assembly\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="LowLevel, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\assemblyowLevel.dll</HintPath>
+      <HintPath>..\assembly\LowLevel.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=6.4.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\assemblyMySql.Data.dll</HintPath>
+      <HintPath>..\assembly\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="PluginInterface, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\assemblyPluginInterface.dll</HintPath>
+      <HintPath>..\assembly\PluginInterface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
