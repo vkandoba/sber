@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using LowLevel;
+using PluginCore;
 
 namespace Plugin_Mtk
 {
@@ -26,8 +26,6 @@ namespace Plugin_Mtk
                 #region load_page_plugin (плагин загрузки страницы)
                 if (extra.sc(type, "load_page_plugin"))
                 {
-                    var filename = @"C:\log.txt";
-                    File.AppendAllLines(filename, parameters.Select(x => $"{x.Key}: {x.Value}"));
                     //параметр ССЫЛКА на загружаемую страницу
                     string url = parameters["url"].ToString();
                     //параметр уровень вложенности загружаемой страницы
@@ -64,10 +62,11 @@ namespace Plugin_Mtk
                     //string stringParameter = configParams["string-parameter"].ToString();
                     #endregion
 
+                    PluginConfigrator.UnsafeHeaderParsingOn();
                     //В переменную content получает код страницы, используя параметры полученные выше.
                     //На выходе словарь outDictParams, который получает код ответа сервера, время загрузки, location, использованную проксю(если использовалась).
                     string content = http.request(url, referer, out outDictParams, out error);
-
+                    PluginConfigrator.UnsafeHeaderParsingOff();
 
                     //возвращает код загруженной страницы
                     return "LOADED BY PLUGIN - " + content;
@@ -411,12 +410,10 @@ namespace Plugin_Mtk
 
         public void Init()
         {
-            //инициализация пока не нужна
         }
 
         public void Destroy()
         {
-            //это тоже пока не надо
         }
 
         public string Name

@@ -24,12 +24,12 @@ namespace PluginCore
             var configSettingsType = typeof(System.Net.Configuration.SettingsSection);
             var settingsType = Assembly.GetAssembly(configSettingsType)?.GetType($"{configSettingsType.FullName}Internal");
 
-            object sectionProperty = settingsType?.InvokeMember("Section", 
-                                                                BindingFlags.Static | BindingFlags.GetProperty | BindingFlags.NonPublic, 
-                                                                null, null, new object[] { });
+            var sectionProperty = settingsType?.InvokeMember("Section", 
+                                                             BindingFlags.Static | BindingFlags.GetProperty | BindingFlags.NonPublic, 
+                                                             null, null, new object[] { });
 
-            FieldInfo useUnsafeHeaderParsing = settingsType?.GetField("useUnsafeHeaderParsing",
-                                                                     BindingFlags.NonPublic | BindingFlags.Instance);
+            var useUnsafeHeaderParsing = settingsType?.GetField("useUnsafeHeaderParsing",
+                                                                BindingFlags.NonPublic | BindingFlags.Instance);
             useUnsafeHeaderParsing?.SetValue(sectionProperty, value);
             return useUnsafeHeaderParsing != null;
         }
