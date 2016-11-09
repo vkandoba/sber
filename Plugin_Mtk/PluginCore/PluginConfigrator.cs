@@ -1,17 +1,31 @@
-﻿using System.Reflection;
+﻿using System.Dynamic;
+using System.Reflection;
 
 namespace PluginCore
 {
-    public class PluginConfigrator
+    public static class PluginConfigrator
     {
-        public static bool UnsafeHeaderParsingOn()
+        private static object wLock = new object();
+        private static int wCounter = 0;
+        
+        public static void UnsafeHeaderParsingOn()
         {
-            return SetUnsafeHeaderParsingBase(true);
+            lock (wLock)
+            {
+                if (wCounter <= 0)
+                    SetUnsafeHeaderParsing(true);
+                wCounter++;
+            }
         }
 
-        public static bool UnsafeHeaderParsingOff()
+        public static void UnsafeHeaderParsingOff()
         {
-            return SetUnsafeHeaderParsingBase(false);
+            lock (wLock)
+            {
+                wCounter--;
+                if (wCounter <= 0)
+                    SetUnsafeHeaderParsing(false);
+            }
         }
 
         /// <summary>
@@ -19,7 +33,7 @@ namespace PluginCore
         ///       <httpWebRequest useUnsafeHeaderParsing = "true" />
         /// т. к. app.config приложения, куда загружается плагин, недоступен
         /// </summary>
-        private static bool SetUnsafeHeaderParsingBase(bool value)
+        private static void SetUnsafeHeaderParsing(bool value)
         {
             var configSettingsType = typeof(System.Net.Configuration.SettingsSection);
             var settingsType = Assembly.GetAssembly(configSettingsType)?.GetType($"{configSettingsType.FullName}Internal");
@@ -31,7 +45,6 @@ namespace PluginCore
             var useUnsafeHeaderParsing = settingsType?.GetField("useUnsafeHeaderParsing",
                                                                 BindingFlags.NonPublic | BindingFlags.Instance);
             useUnsafeHeaderParsing?.SetValue(sectionProperty, value);
-            return useUnsafeHeaderParsing != null;
         }
     }
 }

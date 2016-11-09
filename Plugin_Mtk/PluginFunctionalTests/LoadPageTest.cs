@@ -17,15 +17,34 @@ namespace PluginFunctionalTests
         }
 
         [Test]
-        public void UnsafeHeaderParsingTest()
+        public void TestUnsafeHeaderParsing()
         {
             Assert.Throws<WebException>(LoadPage);
 
-            Assert.True(PluginConfigrator.UnsafeHeaderParsingOn());
+            PluginConfigrator.UnsafeHeaderParsingOn();
             Assert.DoesNotThrow(LoadPage);
 
-            Assert.True(PluginConfigrator.UnsafeHeaderParsingOff());
+            PluginConfigrator.UnsafeHeaderParsingOff();
             Assert.Throws<WebException>(LoadPage);
+        }
+
+        [Test]
+        public void TestConcurentUnsafeHeaderParsing()
+        {
+            PluginConfigrator.UnsafeHeaderParsingOn();
+            PluginConfigrator.UnsafeHeaderParsingOn();
+            Assert.DoesNotThrow(LoadPage);
+
+            PluginConfigrator.UnsafeHeaderParsingOff();
+            Assert.DoesNotThrow(LoadPage);
+
+            PluginConfigrator.UnsafeHeaderParsingOff();
+            Assert.Throws<WebException>(LoadPage);
+
+            PluginConfigrator.UnsafeHeaderParsingOff();
+            PluginConfigrator.UnsafeHeaderParsingOff();
+            PluginConfigrator.UnsafeHeaderParsingOn();
+            Assert.DoesNotThrow(LoadPage);
         }
 
         private void LoadPage()
