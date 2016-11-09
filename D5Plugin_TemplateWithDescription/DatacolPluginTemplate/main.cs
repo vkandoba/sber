@@ -1,23 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Reflection;
-using System.Collections.Specialized;
-using System.IO;
 using LowLevel;
-using System.Data;
-using System.Net;
-using System.Threading;
 
-namespace Plugin
+namespace Plugin_Mtk
 {
-    /// <summary>
-    /// Простейшая реализация интерфейса плагина, сборку с этим классом мы будем подгружать динамически,
-    /// главный проект не имеет на нее ссылок! Класс реализует интерфейс плагина, 
-    /// для унифицированной работы со всеми плагинами
-    /// а так же для того, чтобы можно было динамически найти класс в сборке.
-    /// </summary>
     public class HandlerClass : PluginInterface.IPlugin
     {
         // Create a new Mutex. The creating thread does not own the 
@@ -43,30 +35,11 @@ namespace Plugin
                 string campaignname = parameters["campaignname"].ToString();
                 string type = parameters["type"].ToString();
 
-                #region starting_urls_plugin (плагин обработки начальных URL)
-                if (extra.sc(type, "starting_urls_plugin"))
-                {
-                    //параметр список начальных URL
-                    List<string> startingurls = (List<string>)parameters["startingurls"];
-                    //параметр путь к файлу с начальными URL
-                    string startingurlsfile = parameters["startingurlsfile"].ToString();
-
-                    List<string> resultingList = new List<string>();
-
-                    foreach (string u in startingurls)
-                    {
-                        //пример. удалить или изменить
-                        resultingList.Add(u + "_plug");
-                    }
-
-                    //возвращает обработанный (полученный) список начальных URL
-                    return resultingList;
-                }
-                #endregion
-
                 #region load_page_plugin (плагин загрузки страницы)
                 if (extra.sc(type, "load_page_plugin"))
                 {
+                    var filename = @"C:\log.txt";
+                    File.AppendAllLines(filename, parameters.Select(x => $"{x.Key}: {x.Value}"));
                     //параметр ССЫЛКА на загружаемую страницу
                     string url = parameters["url"].ToString();
                     //параметр уровень вложенности загружаемой страницы
@@ -307,7 +280,7 @@ namespace Plugin
             }
             catch (Exception exp)
             {
-                error = exp.Message;
+                error = $"{exp.Message}\n{exp.StackTrace}";
             }
 
             return "возвращаемое значение по умолчанию (для типов плагинов, у которых оно не используется)";

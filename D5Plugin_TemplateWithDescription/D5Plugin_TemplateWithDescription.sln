@@ -1,7 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D5Plugin_TemplateWithDescription", "DatacolPluginTemplate\D5Plugin_TemplateWithDescription.csproj", "{7281E037-2433-4EEB-A2D5-EDAE63491FEB}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin_Mtk", "DatacolPluginTemplate\Plugin_Mtk.csproj", "{7281E037-2433-4EEB-A2D5-EDAE63491FEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginFunctionalTests", "PluginTests\PluginFunctionalTests.csproj", "{60550B3A-CD61-4E50-8AE0-9CF6A7CEC2F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +23,14 @@ Global
 		{7281E037-2433-4EEB-A2D5-EDAE63491FEB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7281E037-2433-4EEB-A2D5-EDAE63491FEB}.Release|x86.ActiveCfg = Release|x86
 		{7281E037-2433-4EEB-A2D5-EDAE63491FEB}.Release|x86.Build.0 = Release|x86
+		{60550B3A-CD61-4E50-8AE0-9CF6A7CEC2F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60550B3A-CD61-4E50-8AE0-9CF6A7CEC2F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60550B3A-CD61-4E50-8AE0-9CF6A7CEC2F8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{60550B3A-CD61-4E50-8AE0-9CF6A7CEC2F8}.Debug|x86.Build.0 = Debug|Any CPU
+		{60550B3A-CD61-4E50-8AE0-9CF6A7CEC2F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60550B3A-CD61-4E50-8AE0-9CF6A7CEC2F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60550B3A-CD61-4E50-8AE0-9CF6A7CEC2F8}.Release|x86.ActiveCfg = Release|Any CPU
+		{60550B3A-CD61-4E50-8AE0-9CF6A7CEC2F8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

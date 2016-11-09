@@ -8,8 +8,8 @@
     <ProjectGuid>{7281E037-2433-4EEB-A2D5-EDAE63491FEB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DatacolPluginTemplate</RootNamespace>
-    <AssemblyName>D5Plugin_Mtk</AssemblyName>
+    <RootNamespace>Plugin_Mtk</RootNamespace>
+    <AssemblyName>Plugin_Mtk</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -43,7 +43,7 @@
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -79,6 +79,7 @@
       <HintPath>.\PluginInterface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WordPress.Net, Version=2.9.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -88,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="main.cs" />
+    <Compile Include="PluginConfigrator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
