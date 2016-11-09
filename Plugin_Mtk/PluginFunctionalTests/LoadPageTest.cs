@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using NUnit.Framework;
-using Plugin_Mtk;
+using PluginCore;
 
 namespace PluginFunctionalTests
 {

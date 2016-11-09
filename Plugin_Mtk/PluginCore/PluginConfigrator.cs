@@ -1,7 +1,6 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 
-namespace Plugin_Mtk
+namespace PluginCore
 {
     public class PluginConfigrator
     {
