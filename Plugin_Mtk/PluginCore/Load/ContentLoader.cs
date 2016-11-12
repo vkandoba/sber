@@ -20,7 +20,7 @@ namespace PluginCore.Load
                 {
                     var responseStream = response.GetResponseStream();
                     if (responseStream != null)
-                        using (var reader = new StreamReader(responseStream, Encoding.UTF8))
+                        using (var reader = new StreamReader(responseStream, encoding))
                             listContent = reader.ReadToEnd();
                 }
                 return listContent;
