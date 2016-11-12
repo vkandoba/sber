@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LinkTypeResolverTest.cs" />
+    <Compile Include="ListLinkResolverTest.cs" />
     <Compile Include="ObjectLinkMinerTest.cs" />
     <Compile Include="PaginationLinkMinerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

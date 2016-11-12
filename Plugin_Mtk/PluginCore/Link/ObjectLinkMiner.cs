@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace PluginCore.Link
 {
-    public class ObjectLinkMiner : ILinkMiner
+    public class ObjectLinkMiner : ILinkMiner, ILinkResolver
     {
         private readonly Regex objectUrlPattern = new Regex(@"<a[^>]+href\s*=\s*[\""\']{0,1}(http:\/\/(?:w{3}\.)?mtk\.ru\/list\/.+\/id-\d+\/)[""'\s>]+", RegexOptions.Multiline | RegexOptions.Compiled);
 

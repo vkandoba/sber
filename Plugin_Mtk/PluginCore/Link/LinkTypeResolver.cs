@@ -6,10 +6,11 @@ namespace PluginCore.Link
     public class LinkTypeResolver : ILinkTypeResolver
     {
         private readonly ObjectLinkMiner objectLinkMiner = new ObjectLinkMiner();
+        private readonly ListLinkResolver listLinkResolver = new ListLinkResolver();
 
         public LinkType GetType(string url)
         {
-            if (new PaginationLinkMiner(new Uri(url).GetLeftPart(UriPartial.Path)).IsMatch(url))
+            if (listLinkResolver.IsMatch(url))
                 return LinkType.List;
             if (objectLinkMiner.IsMatch(url))
                 return LinkType.Object;
