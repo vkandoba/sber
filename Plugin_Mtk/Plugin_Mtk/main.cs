@@ -31,19 +31,26 @@ namespace Plugin_Mtk
                 string type = parameters["type"].ToString();
 
                 #region load_page_plugin (плагин загрузки страницы)
+
                 if (extra.sc(type, "load_page_plugin"))
                 {
-                    var http = (DatacolHttp)parameters["datacolhttp"];
-                    string referer = parameters["referer"].ToString();
-                    var outParams = new Dictionary<string, object>();
                     string url = parameters["url"].ToString();
 
                     string content;
                     if (url.Contains("list"))
                     {
+                        var http = (DatacolHttp)parameters["datacolhttp"];
+                        string referer = parameters["referer"].ToString();
+                        var outParams = new Dictionary<string, object>();
                         PluginConfigrator.UnsafeHeaderParsingOn();
-                        content = http.request(url, referer, out outParams, out error);
-                        PluginConfigrator.UnsafeHeaderParsingOff();
+                        try
+                        {
+                            content = http.request(url, referer, out outParams, out error);
+                        }
+                        finally
+                        {
+                            PluginConfigrator.UnsafeHeaderParsingOff();
+                        }
                     }
                     else
                     {
