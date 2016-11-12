@@ -10,7 +10,7 @@ namespace PluginCore.Link
 
         public string[] Extract(string content)
         {
-            return GetUrls(content).ToArray();
+            return GetUrls(content).Distinct().ToArray();
         }
 
         private IEnumerable<string> GetUrls(string content)

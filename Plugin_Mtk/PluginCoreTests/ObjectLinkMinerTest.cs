@@ -49,5 +49,13 @@ namespace PluginFunctionalTests
                 "http://www.mtk.ru/list/business/id-446/"
             }));
         }
+
+        [Test]
+        public void LinkExtractUniqurTest()
+        {
+            var content = @"<a href=""http://www.mtk.ru/list/business/id-198/""/>
+                            <a href=""http://www.mtk.ru/list/business/id-198/""/>";
+            Assert.That(objectLinkMiner.Extract(content), Is.EquivalentTo(new [] {"http://www.mtk.ru/list/business/id-198/"}));
+        }
     }
 }
