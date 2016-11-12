@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Link\ILinkMiner.cs" />
     <Compile Include="Link\ObjectLinkMiner.cs" />
+    <Compile Include="Link\PaginationLinkMiner.cs" />
     <Compile Include="Load\ContentLoader.cs" />
     <Compile Include="Load\IContentLoader.cs" />
     <Compile Include="PluginConfigrator.cs" />

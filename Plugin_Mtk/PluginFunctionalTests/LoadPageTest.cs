@@ -8,13 +8,6 @@ namespace PluginFunctionalTests
     public class LoadPageTest : TestBase
     {
         private const string page = "http://www.mtk.ru/commercial-buildings/sale/commercial/";
-        private WebClient client;
-
-        public override void Init()
-        {
-            base.Init();
-            client = new WebClient();
-        }
 
         [Test]
         public void TestUnsafeHeaderParsing()
@@ -55,15 +48,9 @@ namespace PluginFunctionalTests
             Assert.True(list.Contains("listAddressBlock"));
         }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-            client.Dispose();
-        }
-
         private void Load()
         {
-            Encoding.UTF8.GetString(client.DownloadData(page));
+            Download(page);
         }
     }
 }

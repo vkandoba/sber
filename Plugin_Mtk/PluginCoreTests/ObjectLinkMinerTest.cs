@@ -1,10 +1,7 @@
-﻿using System;
-using System.Linq;
-using NUnit.Framework;
-using PluginCore;
+﻿using NUnit.Framework;
 using PluginCore.Link;
 
-namespace PluginFunctionalTests
+namespace PluginCoreTests
 {
     public class MineLinkTest
     {

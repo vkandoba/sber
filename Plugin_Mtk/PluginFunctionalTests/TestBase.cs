@@ -9,16 +9,24 @@ namespace PluginFunctionalTests
     public class TestBase
     {
         protected ContentLoader loader;
+        private WebClient client;
 
         [SetUp]
         public virtual void Init()
         {
             loader = new ContentLoader();
+            client = new WebClient();
         }
 
         [TearDown]
         public virtual void Destroy()
         {
+            client.Dispose();
+        }
+
+        protected virtual string Download(string url)
+        {
+            return Encoding.UTF8.GetString(client.DownloadData(url));
         }
     }
 }
