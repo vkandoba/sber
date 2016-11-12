@@ -54,5 +54,13 @@ namespace PluginCoreTests
                             <a href=""http://www.mtk.ru/list/business/id-198/""/>";
             Assert.That(objectLinkMiner.Extract(content), Is.EquivalentTo(new [] {"http://www.mtk.ru/list/business/id-198/"}));
         }
+
+        [TestCase("http://www.mtk.ru/list/business/id-198/", true)]
+        [TestCase("http://www.mtk.ru/business/sale/business/", false)]
+        [TestCase("http://www.mtk.ru/business/sale/business/?p=1", false)]
+        public void IsMatchTest(string url, bool expected)
+        {
+            Assert.That(objectLinkMiner.IsMatch(url), Is.EqualTo(expected));
+        }
     }
 }

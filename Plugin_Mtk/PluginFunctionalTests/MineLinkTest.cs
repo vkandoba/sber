@@ -23,7 +23,7 @@ namespace PluginFunctionalTests
         {
             var urls = objectLinkMiner.Extract(loader.GetListContent(page, 1));
 
-            Assert.True(urls.All(x => x.Contains("id-")));
+            Assert.True(urls.All(x => x.Contains("id-") && objectLinkMiner.IsMatch(x)));
 
             Console.WriteLine(urls.Aggregate("", (acc, url) => $"{acc}\n{url}"));
         }

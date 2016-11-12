@@ -37,7 +37,7 @@ namespace Plugin_Mtk
                     string url = parameters["url"].ToString();
 
                     string content;
-                    if (url.Contains("list"))
+                    if (objectLinkMiner.IsMatch(url))
                     {
                         var http = (DatacolHttp)parameters["datacolhttp"];
                         string referer = parameters["referer"].ToString();
