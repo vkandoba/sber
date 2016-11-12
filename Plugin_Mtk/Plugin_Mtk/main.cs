@@ -60,7 +60,7 @@ namespace Plugin_Mtk
                     else
                     {
                         int pageNumber;
-                        url = linkTypeResolver.ParseLinkToList(url, out pageNumber);
+                        url = new ListLinkResolver().ParseLinkToList(url, out pageNumber);
                         content = contentLoader.GetListContent(url, pageNumber);
                     }
                     return content;
