@@ -43,6 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Link\ILinkMiner.cs" />
+    <Compile Include="Link\ILInkTypeResolver.cs" />
+    <Compile Include="Link\LinkType.cs" />
+    <Compile Include="Link\LInkTypeResolver.cs" />
     <Compile Include="Link\ObjectLinkMiner.cs" />
     <Compile Include="Link\PaginationLinkMiner.cs" />
     <Compile Include="Load\ContentLoader.cs" />
