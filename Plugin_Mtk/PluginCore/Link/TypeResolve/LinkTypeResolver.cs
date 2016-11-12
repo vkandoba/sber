@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using PluginCore.Link.Mine;
 
-namespace PluginCore.Link
+namespace PluginCore.Link.TypeResolve
 {
     public class LinkTypeResolver : ILinkTypeResolver
     {

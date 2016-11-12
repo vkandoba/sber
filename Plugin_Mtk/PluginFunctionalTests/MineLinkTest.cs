@@ -3,6 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using PluginCore;
 using PluginCore.Link;
+using PluginCore.Link.Mine;
 
 namespace PluginFunctionalTests
 {

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace PluginCore.Link
+namespace PluginCore.Link.Mine
 {
     public class PaginationLinkMiner : ILinkMiner
     {

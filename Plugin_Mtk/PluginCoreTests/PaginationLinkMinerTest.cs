@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using PluginCore.Link;
+using PluginCore.Link.Mine;
 
 namespace PluginCoreTests
 {

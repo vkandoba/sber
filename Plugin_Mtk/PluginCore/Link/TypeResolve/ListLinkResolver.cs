@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace PluginCore.Link
+namespace PluginCore.Link.TypeResolve
 {
     public class ListLinkResolver : ILinkResolver
     {

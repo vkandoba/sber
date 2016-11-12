@@ -8,6 +8,8 @@ using System.Web;
 using LowLevel;
 using PluginCore;
 using PluginCore.Link;
+using PluginCore.Link.Mine;
+using PluginCore.Link.TypeResolve;
 using PluginCore.Load;
 
 namespace Plugin_Mtk

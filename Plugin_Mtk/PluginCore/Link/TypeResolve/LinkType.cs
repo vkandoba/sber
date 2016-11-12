@@ -1,4 +1,4 @@
-﻿namespace PluginCore.Link
+﻿namespace PluginCore.Link.TypeResolve
 {
     public enum LinkType
     {

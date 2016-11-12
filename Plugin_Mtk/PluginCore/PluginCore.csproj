@@ -42,14 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Link\ILinkMiner.cs" />
-    <Compile Include="Link\ILinkResolver.cs" />
-    <Compile Include="Link\ILinkTypeResolver.cs" />
-    <Compile Include="Link\LinkType.cs" />
-    <Compile Include="Link\LinkTypeResolver.cs" />
-    <Compile Include="Link\ListLinkResolver.cs" />
-    <Compile Include="Link\ObjectLinkMiner.cs" />
-    <Compile Include="Link\PaginationLinkMiner.cs" />
+    <Compile Include="Link\Mine\ILinkMiner.cs" />
+    <Compile Include="Link\TypeResolve\ILinkResolver.cs" />
+    <Compile Include="Link\TypeResolve\ILinkTypeResolver.cs" />
+    <Compile Include="Link\TypeResolve\LinkType.cs" />
+    <Compile Include="Link\TypeResolve\LinkTypeResolver.cs" />
+    <Compile Include="Link\TypeResolve\ListLinkResolver.cs" />
+    <Compile Include="Link\Mine\ObjectLinkMiner.cs" />
+    <Compile Include="Link\Mine\PaginationLinkMiner.cs" />
     <Compile Include="Load\ContentLoader.cs" />
     <Compile Include="Load\IContentLoader.cs" />
     <Compile Include="PluginConfigrator.cs" />

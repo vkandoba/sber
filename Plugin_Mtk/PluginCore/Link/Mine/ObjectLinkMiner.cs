@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using PluginCore.Link.TypeResolve;
 
-namespace PluginCore.Link
+namespace PluginCore.Link.Mine
 {
     public class ObjectLinkMiner : ILinkMiner, ILinkResolver
     {
