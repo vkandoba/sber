@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using PluginCore.Link;
+using PluginCore.Link.Mine;
 using PluginCore.Link.TypeResolve;
 
 namespace PluginCoreTests
@@ -11,7 +12,7 @@ namespace PluginCoreTests
         [SetUp]
         public void Init()
         {
-            linkTypeResolver = new LinkTypeResolver();
+            linkTypeResolver = new LinkTypeResolver(new ObjectLinkMiner(), new ListLinkResolver());
         }
 
         [TestCase("http://www.mtk.ru/list/business/id-198/", LinkType.Object)]

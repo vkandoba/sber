@@ -17,15 +17,18 @@ namespace Plugin_Mtk
     public class HandlerClass : PluginInterface.IPlugin
     {
         public static int globalCounter = 0;
+
         private ContentLoader contentLoader;
         private ObjectLinkMiner objectLinkMiner;
+        private ListLinkResolver listLinkResolver;
         private ILinkTypeResolver linkTypeResolver;
 
         public HandlerClass()
         {
             contentLoader = new ContentLoader();
             objectLinkMiner = new ObjectLinkMiner();
-            linkTypeResolver = new LinkTypeResolver();
+            listLinkResolver = new ListLinkResolver();
+            linkTypeResolver = new LinkTypeResolver(objectLinkMiner, listLinkResolver);
         }
 
         public object pluginHandler(Dictionary<string, object> parameters, out string error)
@@ -60,7 +63,7 @@ namespace Plugin_Mtk
                     else
                     {
                         int pageNumber;
-                        url = new ListLinkResolver().ParseLinkToList(url, out pageNumber);
+                        url = listLinkResolver.ParseLinkToList(url, out pageNumber);
                         content = contentLoader.GetListContent(url, pageNumber);
                     }
                     return content;

@@ -4,14 +4,20 @@ namespace PluginCore.Link.TypeResolve
 {
     public class LinkTypeResolver : ILinkTypeResolver
     {
-        private readonly ObjectLinkMiner objectLinkMiner = new ObjectLinkMiner();
-        private readonly ListLinkResolver listLinkResolver = new ListLinkResolver();
+        private readonly ILinkResolver objectLinkResolver;
+        private readonly IListLinkResolver listLinkResolver;
+
+        public LinkTypeResolver(ILinkResolver objectLinkResolver, IListLinkResolver listLinkResolver)
+        {
+            this.objectLinkResolver = objectLinkResolver;
+            this.listLinkResolver = listLinkResolver;
+        }
 
         public LinkType GetType(string url)
         {
             if (listLinkResolver.IsMatch(url))
                 return LinkType.List;
-            if (objectLinkMiner.IsMatch(url))
+            if (objectLinkResolver.IsMatch(url))
                 return LinkType.Object;
             return LinkType.Base;
         }

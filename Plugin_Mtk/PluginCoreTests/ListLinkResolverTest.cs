@@ -21,5 +21,13 @@ namespace PluginCoreTests
         {
             Assert.That(listLinkResolver.IsMatch(url), Is.EqualTo(expected));
         }
+
+        [Test]
+        public void ParseLinkToListTest()
+        {
+            int pageNumber;
+            Assert.That(listLinkResolver.ParseLinkToList("http://www.mtk.ru/business/sale/business/?p=5", out pageNumber), Is.EqualTo("http://www.mtk.ru/business/sale/business/"));
+            Assert.That(pageNumber, Is.EqualTo(5));
+        }
     }
 }
