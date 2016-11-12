@@ -23,7 +23,7 @@ namespace Plugin_Mtk
         {
             error = "";
             string content;
-            if (parameters.Type == LinkType.Base || parameters.Type == LinkType.Object)
+            if (parameters.PageType == PageType.Base || parameters.PageType == PageType.Object)
             {
                 var outParams = new Dictionary<string, object>();
                 PluginConfigrator.UnsafeHeaderParsingOn();

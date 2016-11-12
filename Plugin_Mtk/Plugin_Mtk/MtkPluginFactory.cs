@@ -9,18 +9,17 @@ namespace Plugin_Mtk
     public class MtkPluginFactory : IMtkPluginFactory
     {
         private ContentLoader contentLoader;
-        private ObjectLinkMiner objectLinkMiner;
         private ListLinkResolver listLinkResolver;
-        private ILinkTypeResolver linkTypeResolver;
+        private IPageTypeResolver pageTypeResolver;
         private MtkMinePlugin mtkMinePlugin;
 
         public MtkPluginFactory()
         {
             contentLoader = new ContentLoader();
-            objectLinkMiner = new ObjectLinkMiner();
+            var objectLinkMiner = new ObjectLinkMiner();
             listLinkResolver = new ListLinkResolver();
-            linkTypeResolver = new LinkTypeResolver(objectLinkMiner, listLinkResolver);
-            mtkMinePlugin = new MtkMinePlugin(objectLinkMiner);
+            pageTypeResolver = new PageTypeResolver(objectLinkMiner, listLinkResolver);
+            mtkMinePlugin = new MtkMinePlugin(objectLinkMiner, new PaginationLinkMinerFactory());
         }
 
         public MtkLoadPlugin CreateLoadPlugin(Dictionary<string, object> parameters)
@@ -40,7 +39,7 @@ namespace Plugin_Mtk
             return new MtkPluginParameters
             {
                 Url = url,
-                Type = linkTypeResolver.GetType(url),
+                PageType = pageTypeResolver.GetPageType(url),
                 Content = parameters["content"].ToString()
             };
         }

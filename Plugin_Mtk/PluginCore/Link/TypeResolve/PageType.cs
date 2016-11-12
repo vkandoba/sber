@@ -1,6 +1,6 @@
 ﻿namespace PluginCore.Link.TypeResolve
 {
-    public enum LinkType
+    public enum PageType
     {
         Base,
         List,
