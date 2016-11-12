@@ -89,8 +89,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IMtkPlugin.cs" />
+    <Compile Include="IMtkPluginFactory.cs" />
     <Compile Include="main.cs" />
     <Compile Include="MtkLoadPlugin.cs" />
+    <Compile Include="MtkMinePlugin.cs" />
+    <Compile Include="MtkPluginFactory.cs" />
     <Compile Include="MtkPluginParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

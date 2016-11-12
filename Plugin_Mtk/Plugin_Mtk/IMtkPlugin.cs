@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Plugin_Mtk
+﻿namespace Plugin_Mtk
 {
     public interface IMtkPlugin<out T>
     {

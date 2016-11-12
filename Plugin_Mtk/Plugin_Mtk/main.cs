@@ -5,9 +5,6 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using LowLevel;
-using PluginCore.Link.Mine;
-using PluginCore.Link.TypeResolve;
-using PluginCore.Load;
 
 namespace Plugin_Mtk
 {
@@ -15,17 +12,11 @@ namespace Plugin_Mtk
     {
         public static int globalCounter = 0;
 
-        private ContentLoader contentLoader;
-        private ObjectLinkMiner objectLinkMiner;
-        private ListLinkResolver listLinkResolver;
-        private ILinkTypeResolver linkTypeResolver;
+        private readonly MtkPluginFactory mtkPluginFactory;
 
         public HandlerClass()
         {
-            contentLoader = new ContentLoader();
-            objectLinkMiner = new ObjectLinkMiner();
-            listLinkResolver = new ListLinkResolver();
-            linkTypeResolver = new LinkTypeResolver(objectLinkMiner, listLinkResolver);
+            mtkPluginFactory = new MtkPluginFactory();
         }
 
         public object pluginHandler(Dictionary<string, object> parameters, out string error)
@@ -39,14 +30,7 @@ namespace Plugin_Mtk
 
                 if (extra.sc(type, "load_page_plugin"))
                 {
-                    string url = parameters["url"].ToString();
-                    var http = (DatacolHttp)parameters["datacolhttp"];
-                    var mtkPluginParameters = new MtkPluginParameters
-                    {
-                        Url = url,
-                        Type = linkTypeResolver.GetType(url)
-                    };
-                    return new MtkLoadPlugin(http, contentLoader, listLinkResolver).Handle(mtkPluginParameters, out error);
+                    return mtkPluginFactory.CreateLoadPlugin(parameters).Handle(mtkPluginFactory.GetParameters(parameters), out error);
                 }
                 #endregion
 
@@ -142,18 +126,7 @@ namespace Plugin_Mtk
                 #region links_gather_plugin (плагин сбора ссылок)
                 if (extra.sc(type, "links_gather_plugin"))
                 {
-                    string url = parameters["url"].ToString();
-                    var urlType = linkTypeResolver.GetType(url);
-                    string content = parameters["content"].ToString();
-                    switch (urlType)
-                    {
-                        case LinkType.Base:
-                            return new HashSet<string>(new PaginationLinkMiner(url).Extract(content));
-                        case LinkType.List:
-                            return new HashSet<string>(objectLinkMiner.Extract(content));
-                        default:
-                            return new HashSet<string>();
-                    }
+                    return mtkPluginFactory.GetMinePlugin().Handle(mtkPluginFactory.GetParameters(parameters), out error);
                 }
                 #endregion
 
