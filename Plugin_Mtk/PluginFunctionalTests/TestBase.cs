@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Text;
 using NUnit.Framework;
+using PluginCore.Load;
 
 namespace PluginFunctionalTests
 {
@@ -8,11 +9,13 @@ namespace PluginFunctionalTests
     public class TestBase
     {
         private WebClient client;
+        protected ContentLoader loader;
 
         [SetUp]
-        public void Init()
+        public virtual void Init()
         {
             client = new WebClient();
+            loader = new ContentLoader();
         }
 
         protected string DownloadPage(string url)
@@ -21,7 +24,7 @@ namespace PluginFunctionalTests
         }
 
         [TearDown]
-        public void Destroy()
+        public virtual void Destroy()
         {
             client.Dispose();
         }

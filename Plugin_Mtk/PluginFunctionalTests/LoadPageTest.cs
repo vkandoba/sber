@@ -40,6 +40,13 @@ namespace PluginFunctionalTests
             PluginConfigrator.UnsafeHeaderParsingOff();
         }
 
+        [Test]
+        public void TestLoadListContent()
+        {
+            var list = loader.GetListContent(page, 1);
+            Assert.True(list.Contains("listAddressBlock"));
+        }
+
         private void Load()
         {
             DownloadPage(page);
