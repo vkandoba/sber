@@ -4,10 +4,7 @@ using System.Data;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Web;
 using LowLevel;
-using PluginCore;
-using PluginCore.Link;
 using PluginCore.Link.Mine;
 using PluginCore.Link.TypeResolve;
 using PluginCore.Load;
@@ -43,30 +40,13 @@ namespace Plugin_Mtk
                 if (extra.sc(type, "load_page_plugin"))
                 {
                     string url = parameters["url"].ToString();
-                    var urlType = linkTypeResolver.GetType(url);
-                    string content;
-                    if (urlType == LinkType.Base || urlType == LinkType.Object)
+                    var http = (DatacolHttp)parameters["datacolhttp"];
+                    var mtkPluginParameters = new MtkPluginParameters
                     {
-                        var http = (DatacolHttp)parameters["datacolhttp"];
-                        string referer = parameters["referer"].ToString();
-                        var outParams = new Dictionary<string, object>();
-                        PluginConfigrator.UnsafeHeaderParsingOn();
-                        try
-                        {
-                            content = http.request(url, referer, out outParams, out error);
-                        }
-                        finally
-                        {
-                            PluginConfigrator.UnsafeHeaderParsingOff();
-                        }
-                    }
-                    else
-                    {
-                        int pageNumber;
-                        url = listLinkResolver.ParseLinkToList(url, out pageNumber);
-                        content = contentLoader.GetListContent(url, pageNumber);
-                    }
-                    return content;
+                        Url = url,
+                        Type = linkTypeResolver.GetType(url)
+                    };
+                    return new MtkLoadPlugin(http, contentLoader, listLinkResolver).Handle(mtkPluginParameters, out error);
                 }
                 #endregion
 
