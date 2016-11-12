@@ -7,12 +7,23 @@ using System.Text;
 using System.Text.RegularExpressions;
 using LowLevel;
 using PluginCore;
+using PluginCore.Link;
+using PluginCore.Load;
 
 namespace Plugin_Mtk
 {
     public class HandlerClass : PluginInterface.IPlugin
     {
         public static int globalCounter = 0;
+        private ContentLoader contentLoader;
+        private ObjectLinkMiner objectLinkMiner;
+
+
+        public HandlerClass()
+        {
+            contentLoader = new ContentLoader();
+            objectLinkMiner = new ObjectLinkMiner();
+        }
 
         public object pluginHandler(Dictionary<string, object> parameters, out string error)
         {
@@ -26,50 +37,8 @@ namespace Plugin_Mtk
                 #region load_page_plugin (плагин загрузки страницы)
                 if (extra.sc(type, "load_page_plugin"))
                 {
-                    //параметр ССЫЛКА на загружаемую страницу
                     string url = parameters["url"].ToString();
-                    //параметр уровень вложенности загружаемой страницы
-                    int nestinglevel = Convert.ToInt32(parameters["nestinglevel"].ToString());
-                    //параметр реферер для загружаемой страницы
-                    string referer = parameters["referer"].ToString();
-                    //параметр флаг использования прокси при загрузке
-                    bool useproxy = Convert.ToBoolean(parameters["useproxy"].ToString());
-                    //параметр объект Загрузчик Datacol
-                    DatacolHttp http = (DatacolHttp)parameters["datacolhttp"];
-                    //параметр имя прокси чекера
-                    string checkername = parameters["checkername"].ToString();
-                    //параметр режим использования прокси (список или из прокси чекера)
-                    string proxymode = parameters["proxymode"].ToString();
-                    //параметр предопределенный прокси для загрузки страницы
-                    WebProxy webproxy = (WebProxy)parameters["webproxy"];
-                    //параметр предопределенная кодировка загружаемой страницы
-                    string encoding = parameters["encoding"].ToString();
-                    WebProxy usedProxy = new WebProxy();
-
-                    Dictionary<string, object> outDictParams = new Dictionary<string, object>();
-
-
-                    #region Get Config Params
-                    //параметр конфигурация плагина экспорта
-                    string config = parameters["config"].ToString();
-
-                    Dictionary<string, object> configParams = GetDictionaryParamsConfig(config);
-                    //примеры параметров
-                    //
-                    //List<string> listParameter = (List<string>)configParams["list-parameter"];
-                    //bool boolParameter =  Convert.ToInt32(configParams["bool-parameter"].ToString()) == 1;
-                    //int intParameter = Convert.ToInt32(configParams["int-parameter"].ToString());
-                    //string stringParameter = configParams["string-parameter"].ToString();
-                    #endregion
-
-                    PluginConfigrator.UnsafeHeaderParsingOn();
-                    //В переменную content получает код страницы, используя параметры полученные выше.
-                    //На выходе словарь outDictParams, который получает код ответа сервера, время загрузки, location, использованную проксю(если использовалась).
-                    string content = http.request(url, referer, out outDictParams, out error);
-                    PluginConfigrator.UnsafeHeaderParsingOff();
-
-                    //возвращает код загруженной страницы
-                    return "LOADED BY PLUGIN - " + content;
+                    return "LOADED BY PLUGIN - " + contentLoader.GetListContent(url, 1);
                 }
                 #endregion
 
@@ -165,22 +134,8 @@ namespace Plugin_Mtk
                 #region links_gather_plugin (плагин сбора ссылок)
                 if (extra.sc(type, "links_gather_plugin"))
                 {
-                    HashSet<string> resultingList = new HashSet<string>();
-
-                    //параметр ССЫЛКА на страницу, на которой производится сбор ссылок
-                    string url = parameters["url"].ToString();
-                    //параметр уровень вложенности страницы, на которой производится сбор ссылок
-                    int nestinglevel = Convert.ToInt32(parameters["nestinglevel"].ToString());
-                    //параметр реферер  страницы, на которой производится сбор ссылок
-                    string referer = parameters["referer"].ToString();
-                    //параметр контент  страницы, на которой производится сбор ссылок
                     string content = parameters["content"].ToString();
-
-                    //пример. удалить или изменить
- //                 resultingList.Add("http://web-data-extractor.net/");
-
-                    //возвращает список собранных ссылок
-                    return resultingList;
+                    return new HashSet<string>(objectLinkMiner.Extract(content));
                 }
                 #endregion
 
