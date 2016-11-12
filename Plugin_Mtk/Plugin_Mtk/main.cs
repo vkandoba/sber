@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using LowLevel;
@@ -18,7 +17,6 @@ namespace Plugin_Mtk
         private ContentLoader contentLoader;
         private ObjectLinkMiner objectLinkMiner;
 
-
         public HandlerClass()
         {
             contentLoader = new ContentLoader();
@@ -30,15 +28,28 @@ namespace Plugin_Mtk
             try
             {
                 error = "";
-                ///Получает имя кампании из словаря parameters
-                string campaignname = parameters["campaignname"].ToString();
                 string type = parameters["type"].ToString();
 
                 #region load_page_plugin (плагин загрузки страницы)
                 if (extra.sc(type, "load_page_plugin"))
                 {
+                    var http = (DatacolHttp)parameters["datacolhttp"];
+                    string referer = parameters["referer"].ToString();
+                    var outParams = new Dictionary<string, object>();
                     string url = parameters["url"].ToString();
-                    return "LOADED BY PLUGIN - " + contentLoader.GetListContent(url, 1);
+
+                    string content;
+                    if (url.Contains("list"))
+                    {
+                        PluginConfigrator.UnsafeHeaderParsingOn();
+                        content = http.request(url, referer, out outParams, out error);
+                        PluginConfigrator.UnsafeHeaderParsingOff();
+                    }
+                    else
+                    {
+                        content = contentLoader.GetListContent(url, 1);
+                    }
+                    return content;
                 }
                 #endregion
 
@@ -135,6 +146,7 @@ namespace Plugin_Mtk
                 if (extra.sc(type, "links_gather_plugin"))
                 {
                     string content = parameters["content"].ToString();
+//                    File.AppendAllLines(log, objectLinkMiner.Extract(content));
                     return new HashSet<string>(objectLinkMiner.Extract(content));
                 }
                 #endregion
