@@ -4,6 +4,7 @@ using System.Data;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 using LowLevel;
 using PluginCore;
 using PluginCore.Link;
@@ -16,11 +17,13 @@ namespace Plugin_Mtk
         public static int globalCounter = 0;
         private ContentLoader contentLoader;
         private ObjectLinkMiner objectLinkMiner;
+        private ILinkResolver linkResolver;
 
         public HandlerClass()
         {
             contentLoader = new ContentLoader();
             objectLinkMiner = new ObjectLinkMiner();
+            linkResolver = new LinkResolver();
         }
 
         public object pluginHandler(Dictionary<string, object> parameters, out string error)
@@ -35,9 +38,9 @@ namespace Plugin_Mtk
                 if (extra.sc(type, "load_page_plugin"))
                 {
                     string url = parameters["url"].ToString();
-
+                    var urlType = linkResolver.GetType(url);
                     string content;
-                    if (objectLinkMiner.IsMatch(url))
+                    if (urlType == LinkType.Base || urlType == LinkType.Object)
                     {
                         var http = (DatacolHttp)parameters["datacolhttp"];
                         string referer = parameters["referer"].ToString();
@@ -54,7 +57,9 @@ namespace Plugin_Mtk
                     }
                     else
                     {
-                        content = contentLoader.GetListContent(url, 1);
+                        int pageNumber;
+                        url = linkResolver.ParseLinkToList(url, out pageNumber);
+                        content = contentLoader.GetListContent(url, pageNumber);
                     }
                     return content;
                 }
@@ -152,9 +157,18 @@ namespace Plugin_Mtk
                 #region links_gather_plugin (плагин сбора ссылок)
                 if (extra.sc(type, "links_gather_plugin"))
                 {
+                    string url = parameters["url"].ToString();
+                    var urlType = linkResolver.GetType(url);
                     string content = parameters["content"].ToString();
-//                    File.AppendAllLines(log, objectLinkMiner.Extract(content));
-                    return new HashSet<string>(objectLinkMiner.Extract(content));
+                    switch (urlType)
+                    {
+                        case LinkType.Base:
+                            return new HashSet<string>(new PaginationLinkMiner(url).Extract(content));
+                        case LinkType.List:
+                            return new HashSet<string>(objectLinkMiner.Extract(content));
+                        default:
+                            return new HashSet<string>();
+                    }
                 }
                 #endregion
 

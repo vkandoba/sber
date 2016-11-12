@@ -7,12 +7,12 @@ namespace PluginCore.Link
     {
         private readonly string baseUrl;
         private readonly Regex paginatorAjaxArgPattern;
-        private readonly Regex urlPattern;
+        private readonly Regex queryPattern;
 
         public PaginationLinkMiner(string baseUrl)
         {
             this.baseUrl = baseUrl;
-            urlPattern = new Regex(@"\?p=(\d+)$", RegexOptions.Multiline | RegexOptions.Compiled);
+            queryPattern = new Regex(@"\?p=(\d+)$", RegexOptions.Multiline | RegexOptions.Compiled);
             paginatorAjaxArgPattern = new Regex(@"pagesTotal: (\d+),", RegexOptions.Multiline | RegexOptions.Compiled);
         }
 
@@ -25,7 +25,7 @@ namespace PluginCore.Link
 
         public bool IsMatch(string url)
         {
-            return url.StartsWith(baseUrl) && urlPattern.IsMatch(url);
+            return url.StartsWith(baseUrl) && queryPattern.IsMatch(url);
         }
 
         private string Generate(int pageNumber)

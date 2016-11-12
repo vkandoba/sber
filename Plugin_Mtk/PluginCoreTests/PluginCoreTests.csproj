@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LinkTypeResolverTest.cs" />
+    <Compile Include="LinkResolverTest.cs" />
     <Compile Include="ObjectLinkMinerTest.cs" />
     <Compile Include="PaginationLinkMinerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
