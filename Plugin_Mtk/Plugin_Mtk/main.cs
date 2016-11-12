@@ -17,13 +17,13 @@ namespace Plugin_Mtk
         public static int globalCounter = 0;
         private ContentLoader contentLoader;
         private ObjectLinkMiner objectLinkMiner;
-        private ILinkResolver linkResolver;
+        private ILinkTypeResolver linkTypeResolver;
 
         public HandlerClass()
         {
             contentLoader = new ContentLoader();
             objectLinkMiner = new ObjectLinkMiner();
-            linkResolver = new LinkResolver();
+            linkTypeResolver = new LinkTypeResolver();
         }
 
         public object pluginHandler(Dictionary<string, object> parameters, out string error)
@@ -38,7 +38,7 @@ namespace Plugin_Mtk
                 if (extra.sc(type, "load_page_plugin"))
                 {
                     string url = parameters["url"].ToString();
-                    var urlType = linkResolver.GetType(url);
+                    var urlType = linkTypeResolver.GetType(url);
                     string content;
                     if (urlType == LinkType.Base || urlType == LinkType.Object)
                     {
@@ -58,7 +58,7 @@ namespace Plugin_Mtk
                     else
                     {
                         int pageNumber;
-                        url = linkResolver.ParseLinkToList(url, out pageNumber);
+                        url = linkTypeResolver.ParseLinkToList(url, out pageNumber);
                         content = contentLoader.GetListContent(url, pageNumber);
                     }
                     return content;
@@ -158,7 +158,7 @@ namespace Plugin_Mtk
                 if (extra.sc(type, "links_gather_plugin"))
                 {
                     string url = parameters["url"].ToString();
-                    var urlType = linkResolver.GetType(url);
+                    var urlType = linkTypeResolver.GetType(url);
                     string content = parameters["content"].ToString();
                     switch (urlType)
                     {

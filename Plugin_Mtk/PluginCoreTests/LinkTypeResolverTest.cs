@@ -3,14 +3,14 @@ using PluginCore.Link;
 
 namespace PluginCoreTests
 {
-    public class LinkResolverTest
+    public class LinkTypeResolverTest
     {
-        private ILinkResolver linkResolver;
+        private ILinkTypeResolver linkTypeResolver;
 
         [SetUp]
         public void Init()
         {
-            linkResolver = new LinkResolver();
+            linkTypeResolver = new LinkTypeResolver();
         }
 
         [TestCase("http://www.mtk.ru/list/business/id-198/", LinkType.Object)]
@@ -18,7 +18,7 @@ namespace PluginCoreTests
         [TestCase("http://www.mtk.ru/business/sale/business/?p=1", LinkType.List)]
         public void IsMatchTest(string url, LinkType expected)
         {
-           Assert.That(linkResolver.GetType(url), Is.EqualTo(expected));
+           Assert.That(linkTypeResolver.GetType(url), Is.EqualTo(expected));
         }
     }
 }

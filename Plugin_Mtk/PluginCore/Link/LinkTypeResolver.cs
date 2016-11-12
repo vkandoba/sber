@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace PluginCore.Link
 {
-    public class LinkResolver : ILinkResolver
+    public class LinkTypeResolver : ILinkTypeResolver
     {
         private readonly ObjectLinkMiner objectLinkMiner = new ObjectLinkMiner();
 
