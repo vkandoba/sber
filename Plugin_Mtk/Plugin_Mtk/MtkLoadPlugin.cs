@@ -22,27 +22,31 @@ namespace Plugin_Mtk
         public string Handle(MtkPluginParameters parameters, out string error)
         {
             error = "";
-            string content;
-            if (parameters.PageType == PageType.Base || parameters.PageType == PageType.Object)
+            if (parameters.PageType == PageType.List)
+                return DownloadListPage(parameters.Url);
+
+            return DonwloadPageByDatacol(parameters.Url, out error);
+        }
+
+        private string DonwloadPageByDatacol(string url, out string error)
+        {
+            var outParams = new Dictionary<string, object>();
+            PluginConfigrator.UnsafeHeaderParsingOn();
+            try
             {
-                var outParams = new Dictionary<string, object>();
-                PluginConfigrator.UnsafeHeaderParsingOn();
-                try
-                {
-                    content = httpClient.request(parameters.Url, null, out outParams, out error);
-                }
-                finally
-                {
-                    PluginConfigrator.UnsafeHeaderParsingOff();
-                }
+                 return httpClient.request(url, null, out outParams, out error);
             }
-            else
+            finally
             {
-                int pageNumber;
-                var url = listLinkResolver.ParseLinkToList(parameters.Url, out pageNumber);
-                content = contentLoader.GetListContent(url, pageNumber);
+                PluginConfigrator.UnsafeHeaderParsingOff();
             }
-            return content;
+        }
+
+        private string DownloadListPage(string url)
+        {
+            int pageNumber;
+            var baseUrl = listLinkResolver.ParseLinkToList(url, out pageNumber);
+            return contentLoader.GetListContent(baseUrl, pageNumber);
         }
     }
 }
