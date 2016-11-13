@@ -40,7 +40,7 @@ namespace Plugin_Mtk
             {
                 Url = url,
                 PageType = pageTypeResolver.GetPageType(url),
-                Content = parameters["content"].ToString()
+                Content = parameters.SafeGet("content", "").ToString()
             };
         }
     }

@@ -95,6 +95,7 @@
     <Compile Include="MtkMinePlugin.cs" />
     <Compile Include="MtkPluginFactory.cs" />
     <Compile Include="MtkPluginParameters.cs" />
+    <Compile Include="ParametersExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
