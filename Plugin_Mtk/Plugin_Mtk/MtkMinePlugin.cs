@@ -18,14 +18,19 @@ namespace Plugin_Mtk
         public HashSet<string> Handle(MtkPluginParameters parameters, out string error)
         {
             error = "";
+            return new HashSet<string>(MineLinks(parameters));
+        }
+
+        private string[] MineLinks(MtkPluginParameters parameters)
+        {
             switch (parameters.PageType)
             {
                 case PageType.Base:
-                    return new HashSet<string>(linkMinerFactory.CreatePaginationLinkMiner(parameters.Url).Extract(parameters.Content));
+                    return linkMinerFactory.CreatePaginationLinkMiner(parameters.Url).Extract(parameters.Content);
                 case PageType.List:
-                    return new HashSet<string>(objectLinkMiner.Extract(parameters.Content));
+                    return objectLinkMiner.Extract(parameters.Content);
                 default:
-                    return new HashSet<string>();
+                    return new string[0];
             }
         }
     }
