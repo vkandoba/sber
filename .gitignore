@@ -1,7 +1,8 @@
 *.dll
 *.suo
+*.user
+!*/assembly/*
+build/
 obj/
 bin/
-build/
-*/packages/*
-*.user
+packages
